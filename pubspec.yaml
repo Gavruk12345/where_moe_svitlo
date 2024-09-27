@@ -1,0 +1,36 @@
+name: where_moe_svitlo
+description: "A new Flutter project."
+publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.4.0 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  cupertino_icons: ^1.0.6
+  flutter_map: ^4.0.0
+  latlong2: ^0.8.1
+  google_maps_flutter: ^2.2.5
+
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^4.0.0
+
+flutter:
+  uses-material-design: true
+
+  assets:
+    - assets/images/setting.png
+    - assets/images/map.png
+    - assets/images/calendar.png
+    - assets/images/storm.png
+    - assets/images/rain.png
+    - assets/images/sun.png
+    - assets/images/pharmacy.png
+    - assets/images/schedule.png
+    - assets/images/wheel.png
