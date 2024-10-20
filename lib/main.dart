@@ -3,16 +3,15 @@ import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart';
 
 
+
 void main() {
-  runApp(const MyApp());
-}
+  runApp(const MyApp());}
 
 class MyApp extends StatefulWidget {
   const MyApp({super.key});
 
   @override
-  State<MyApp> createState() => _MyAppState();
-}
+  State<MyApp> createState() => _MyAppState();}
 
 class _MyAppState extends State<MyApp> {
   bool isDarkTheme = false;
@@ -36,8 +35,7 @@ class _MyAppState extends State<MyApp> {
         '/settings': (context) => const SettingsPage(),
       },
     );
-  }
-}
+  }}
 
 class MyHomePage extends StatefulWidget {
   final VoidCallback toggleTheme;
@@ -46,8 +44,7 @@ class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key, required this.toggleTheme, required this.isDarkTheme});
 
   @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
+  State<MyHomePage> createState() => _MyHomePageState();}
 
 class _MyHomePageState extends State<MyHomePage> {
   String buttonText = 'ON';
@@ -169,8 +166,7 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
       ],
     );
-  }
-}
+  }}
 
 class MapPage extends StatelessWidget {
   const MapPage({super.key});
@@ -209,15 +205,13 @@ class MapPage extends StatelessWidget {
         ],
       ),
     );
-  }
-}
+  }}
 
 class SchedulePage extends StatefulWidget {
   const SchedulePage({super.key});
 
   @override
-  _SchedulePageState createState() => _SchedulePageState();
-}
+  _SchedulePageState createState() => _SchedulePageState();}
 
 class _SchedulePageState extends State<SchedulePage> {
   // Поточний вибраний день тижня
@@ -349,71 +343,280 @@ class _SchedulePageState extends State<SchedulePage> {
         ],
       ),
     );
-  }
-}
+  }}
 
-
-
-class SettingsPage extends StatelessWidget {
+class SettingsPage extends StatefulWidget {
   const SettingsPage({super.key});
+
+  @override
+  _SettingsPageState createState() => _SettingsPageState();}
+
+class _SettingsPageState extends State<SettingsPage> {
+  // Змінні для вибору значень з випадаючих меню
+  String _selectedItem1 = 'Option 1';
+  String _selectedItem2 = 'Option 1';
+  
+  // Змінна для керування станом світча
+  bool isDarkMode = false;
+
+  // Список опцій для випадаючого меню
+  final List<String> _dropdownItems = ['Option 1', 'Option 2', 'Option 3'];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Налаштування'),
+        title: const Text('Settings'),
       ),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Text(
-              'Налаштування графіку відключень',
-              style: TextStyle(
-                fontWeight: FontWeight.w300, // Тонкий шрифт
-                fontSize: 16.0,
-              ),
-              textAlign: TextAlign.center,
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16.0),
-            child: Text(
-              'Виберіть ваше розташування',
-              style: TextStyle(
-                fontWeight: FontWeight.w300, // Тонкий шрифт
-                fontSize: 16.0,
-              ),
-            ),
-          ),
-          Expanded(
-            child: Center(
-              child: Text(''),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                ElevatedButton(
-                  onPressed: () {},
-                  style: ElevatedButton.styleFrom(
-                    padding: EdgeInsets.symmetric(horizontal: 24.0, vertical: 12.0), // Подовгуваста кнопка
-                    backgroundColor: Colors.white, // Фон кнопки білий
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            Container(
+              margin: const EdgeInsets.all(16),
+              padding: const EdgeInsets.all(16),
+              decoration: BoxDecoration(
+                color: isDarkMode ? Colors.grey[850] : Colors.white,
+                borderRadius: BorderRadius.circular(20),
+                boxShadow: [
+                  BoxShadow(
+                    color: isDarkMode
+                        ? Colors.white.withOpacity(0.2)
+                        : Colors.black.withOpacity(0.2),
+                    spreadRadius: 5,
+                    blurRadius: 7,
+                    offset: const Offset(0, 3),
                   ),
-                  child: Text(
-                    'Вибрати',
+                ],
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  // Заголовок
+                  Text(
+                    'Налаштування графіка відключень',
                     style: TextStyle(
-                      color: Colors.black, // Текст чорний
+                      fontSize: 24,
+                      fontWeight: FontWeight.w300,
+                      color: isDarkMode ? Colors.white : Colors.black,
+                    ),
+                  ),
+                  const SizedBox(height: 16), // Відступ перед рядками
+                  
+                  // Перший рядок з текстом і ширшим випадаючим меню
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      const Text(
+                        'Виберіть область:',
+                        style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.w300,
+                        ),
+                      ),
+                      Container(
+                        width: 150, // Ширина випадаючого меню
+                        decoration: BoxDecoration(
+                          border: Border.all(
+                            color: isDarkMode ? Colors.white : Color.fromARGB(255, 161, 161, 161), // Чорна рамка в світлому режимі, біла в темному
+                          ),
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                        child: DropdownButtonFormField<String>(
+                          value: _selectedItem1,
+                          decoration: InputDecoration(
+                            border: InputBorder.none, // Приховати стандартний бордер
+                            contentPadding: const EdgeInsets.symmetric(
+                                horizontal: 12, vertical: 10),
+                          ),
+                          dropdownColor:
+                              isDarkMode ? Colors.grey[850] : Colors.white,
+                          items: _dropdownItems.map((String value) {
+                            return DropdownMenuItem<String>(
+                              value: value,
+                              child: Text(value),
+                            );
+                          }).toList(),
+                          onChanged: (newValue) {
+                            setState(() {
+                              _selectedItem1 = newValue!;
+                            });
+                          },
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 16), 
+                  
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      const Text(
+                        'Виберіть графік:',
+                        style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.w300,
+                        ),
+                      ),
+                      Container(
+                        width: 150, 
+                        decoration: BoxDecoration(
+                          border: Border.all(
+                            color: isDarkMode ? Colors.white : Color.fromARGB(255, 161, 161, 161), 
+                          ),
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                        child: DropdownButtonFormField<String>(
+                          value: _selectedItem2,
+                          decoration: InputDecoration(
+                            border: InputBorder.none, 
+                            contentPadding: const EdgeInsets.symmetric(
+                                horizontal: 12, vertical: 10),
+                          ),
+                          dropdownColor:
+                              isDarkMode ? Colors.grey[850] : Colors.white,
+                          items: _dropdownItems.map((String value) {
+                            return DropdownMenuItem<String>(
+                              value: value,
+                              child: Text(value),
+                            );
+                          }).toList(),
+                          onChanged: (newValue) {
+                            setState(() {
+                              _selectedItem2 = newValue!;
+                            });
+                          },
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 20), 
+                  /*Кнопка*/
+                  Center(
+                    child: ElevatedButton(
+                      onPressed: () {
+                        // Дія при натисканні на кнопку
+                      },
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: isDarkMode ? Colors.grey[800] : Colors.white, // Менш чорний фон у темному режимі
+                        foregroundColor: isDarkMode ? Colors.white : Colors.black, // Колір тексту кнопки
+                        shadowColor: isDarkMode ? Colors.white.withOpacity(0.7) : Colors.black.withOpacity(0.5), // Колір тіні
+                        elevation: 4, // Збільшена висота тіні
+                        shape: const StadiumBorder(), // Овальна форма кнопки
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 40,
+                          vertical: 15,
+                        ),
+                      ),
+                      child: const Text(
+                        'Підтвердити',
+                        style: TextStyle(
+                          fontWeight: FontWeight.w300, // Тонкий шрифт
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            Container(
+              margin: const EdgeInsets.all(16),
+              padding: const EdgeInsets.all(16),
+              decoration: BoxDecoration(
+                color: isDarkMode ? Colors.grey[850] : Colors.white,
+                borderRadius: BorderRadius.circular(20),
+                boxShadow: [
+                  BoxShadow(
+                    color: isDarkMode
+                        ? Colors.white.withOpacity(0.2)
+                        : Colors.black.withOpacity(0.2),
+                    spreadRadius: 5,
+                    blurRadius: 7,
+                    offset: const Offset(0, 3),
+                  ),
+                ],
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        'Налаштування сповіщення',
+                        style: TextStyle(
+                          fontSize: 24,
+                          fontWeight: FontWeight.w300,
+                          color: isDarkMode ? Colors.white : Colors.black,
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 16), // Відступ між заголовком і текстом
+                  Column(
+                    children: List.generate(5, (index) {
+                      return Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            'Текст рядка ${index + 1}',
+                            style: TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.w400,
+                              color: isDarkMode ? Colors.white : Colors.black,
+                            ),
+                          ),
+                          Switch(
+                            value: false, // Змінюйте значення за необхідності
+                            onChanged: (value) {
+                              // Логіка для обробки зміни значення світча
+                            },
+                            activeColor: Colors.white,
+                            activeTrackColor: Colors.grey,
+                            inactiveThumbColor: Colors.black,
+                            inactiveTrackColor: Colors.grey[400],
+                          ),
+                        ],
+                      );
+                    }),
+                  ),
+                ],
+              ),
+            ),
+
+            Container(
+              margin: const EdgeInsets.all(16),
+              height: 200,
+              decoration: BoxDecoration(
+                color: isDarkMode ? Colors.grey[850] : Colors.white,
+                borderRadius: BorderRadius.circular(20),
+                boxShadow: [
+                  BoxShadow(
+                    color: isDarkMode
+                        ? Colors.white.withOpacity(0.2)
+                        : Colors.black.withOpacity(0.2),
+                    spreadRadius: 5,
+                    blurRadius: 7,
+                    offset: const Offset(0, 3),
+                  ),
+                ],
+              ),
+              child: Padding(
+                padding: const EdgeInsets.all(16),
+                child: Align(
+                  alignment: Alignment.topLeft,
+                  child: Text(
+                    'Container 3',
+                    style: TextStyle(
+                      fontSize: 24,
+                      fontWeight: FontWeight.w300,
+                      color: isDarkMode ? Colors.white : Colors.black,
                     ),
                   ),
                 ),
-              ],
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
