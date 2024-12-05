@@ -16,6 +16,8 @@ dependencies:
   google_maps_flutter: ^2.2.5
   sqflite: ^2.0.0+3
   path_provider: ^2.0.9
+  flutter_svg: ^0.23.0 
+
 
 
 
@@ -38,3 +40,30 @@ flutter:
     - assets/images/pharmacy.png
     - assets/images/schedule.png
     - assets/images/wheel.png
+    - assets/images/oblst/charkivska.png
+    - assets/images/oblst/cherkaska.png
+    - assets/images/oblst/chernigivs.png
+    - assets/images/oblst/Chernivec.png
+    - assets/images/oblst/chersons.png
+    - assets/images/oblst/creame.png
+    - assets/images/oblst/djitomu.png
+    - assets/images/oblst/dnipro.png
+    - assets/images/oblst/donbas.png
+    - assets/images/oblst/hmelnic.png
+    - assets/images/oblst/ivanofrank.png
+    - assets/images/oblst/kievska.png
+    - assets/images/oblst/kirovogr.png
+    - assets/images/oblst/Kyiv.png
+    - assets/images/oblst/luganska.png
+    - assets/images/oblst/lvivska.png
+    - assets/images/oblst/mukoivs.png
+    - assets/images/oblst/odesca.png
+    - assets/images/oblst/poltavska.png
+    - assets/images/oblst/rivnencka.png
+    - assets/images/oblst/sumska.png
+    - assets/images/oblst/ternop.png
+    - assets/images/oblst/Vinnic.png
+    - assets/images/oblst/volin.png
+    - assets/images/oblst/zakarpats.png
+    - assets/images/oblst/zaporiz.png
+

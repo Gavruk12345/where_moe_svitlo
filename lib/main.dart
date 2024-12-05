@@ -78,7 +78,9 @@ class _MyHomePageState extends State<MyHomePage> {
                 width: 200.0,
                 height: 200.0,
                 decoration: BoxDecoration(
-                  color: buttonText == 'ON' ? Colors.white : Colors.black,
+                  color: widget.isDarkTheme
+                      ? (buttonText == 'ON' ? Colors.black : Colors.white) // Темна тема: "ON" темний фон, "OFF" білий фон
+                      : (buttonText == 'ON' ? Colors.white : Colors.black), // Світла тема: "ON" білий фон, "OFF" темний фон
                   shape: BoxShape.circle,
                   border: Border.all(color: Colors.white, width: 1.0),
                   boxShadow: [
@@ -86,18 +88,26 @@ class _MyHomePageState extends State<MyHomePage> {
                       color: widget.isDarkTheme ? Colors.white.withOpacity(0.5) : Colors.black.withOpacity(0.5),
                       spreadRadius: 6,
                       blurRadius: 13,
-                      offset: Offset(0, 3),
+                      offset: const Offset(0, 3),
                     ),
                   ],
                 ),
                 child: Center(
                   child: Text(
                     buttonText,
-                    style: TextStyle(fontSize: 24, fontWeight: FontWeight.w300),
+                    style: TextStyle(
+                      fontSize: 24,
+                      fontWeight: FontWeight.w300,
+                      color: widget.isDarkTheme
+                          ? (buttonText == 'ON' ? Colors.white : Colors.black) // Темна тема: "ON" білий текст, "OFF" чорний текст
+                          : (buttonText == 'ON' ? Colors.black : Colors.white), // Світла тема: "ON" чорний текст, "OFF" білий текст
+                    ),
                   ),
                 ),
               ),
             ),
+
+
             const SizedBox(height: 125),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
